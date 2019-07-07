@@ -85,15 +85,12 @@ export = class extends Generator {
       templateOptions
     )
     const dotFiles = [
-      "dependency-cruiser.json",
       "eslintrc.json",
       "gitignore",
       "huskyrc",
       "lintstagedrc",
       "npmrc",
       "npmrc.template",
-      "prettierignore",
-      "prettierrc",
       "travis.yml",
       "yarnrc",
     ]
