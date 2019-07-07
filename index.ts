@@ -101,10 +101,7 @@ export = class extends Generator {
   }
 
   public install() {
-    const dependencyPackages = [
-      "react",
-      "react-dom",
-    ];
+    const dependencyPackages = [];
     const devDependencyPackages = [
       "@types/clean-webpack-plugin@^0.1.3",
       "@types/html-webpack-plugin@^3.2.0",
