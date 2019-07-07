@@ -101,8 +101,8 @@ export = class extends Generator {
   }
 
   public install() {
-    const dependencyPackages = [];
-    const devDependencyPackages = [
+    const dependencyPackages: string[] = [];
+    const devDependencyPackages: string[] = [
       "@types/clean-webpack-plugin@^0.1.3",
       "@types/html-webpack-plugin@^3.2.0",
       "@types/webpack@^4.4.34",
