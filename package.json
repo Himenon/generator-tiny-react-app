@@ -1,7 +1,7 @@
 {
   "name": "@himenon/generator-tiny-react-app",
-  "version": "0.3.0",
-  "description": "React Application bootstrap.",
+  "version": "0.1.0",
+  "description": "Tiny React Application bootstrap.",
   "scripts": {
     "start": "yarn run build:watch",
     "test": "test",

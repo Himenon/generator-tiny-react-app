@@ -1,4 +1,4 @@
-# generator-react-app
+# @himenon/generator-tiny-react-app
 
 [![npm version](https://badgen.net/npm/v/phimenon/generator-tiny-react-app)](https://npm.im/phimenon/generator-tiny-react-app)
 [![Build Status](https://travis-ci.com/@himenon/generator-tiny-react-app.svg?branch=master)](https://travis-ci.com/@himenon/generator-tiny-react-app)
