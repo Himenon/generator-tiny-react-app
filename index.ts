@@ -11,11 +11,6 @@ interface PromptResult {
   authorUrl: string;
 }
 
-interface PromptQuestion extends Generator.Question {
-  type?: "input" | "confirm" | "list" | "rawlist" | "password";
-  name: keyof PromptResult;
-}
-
 export = class extends Generator {
   constructor(args: string|string[], options: {}) {
     super(args, options);
@@ -36,7 +31,12 @@ export = class extends Generator {
       email: author && author.email,
       url: author && author.url,
     };
-    const questions: PromptQuestion[] = [
+    const repository = typeof pkg.repository === "string" ? {
+      name: pkg.repository,
+    } : {
+      name: pkg.repository ? pkg.repository.url : "",
+    };
+    const questions: Generator.Questions<PromptResult> = [
       {
         type: "input",
         name: "projectName",
@@ -53,7 +53,7 @@ export = class extends Generator {
         type: "input",
         name: "repositoryName",
         message: "Repository name",
-        default: pkg.repository,
+        default: repository.name,
       },
       {
         type: "input",
@@ -74,7 +74,7 @@ export = class extends Generator {
         default: inputAuthor.url,
       },
     ]
-    return await this.prompt(questions) as PromptResult;
+    return this.prompt(questions);
   }
 
   public async init() {
@@ -109,86 +109,28 @@ export = class extends Generator {
       "react-dom",
     ];
     const devDependencyPackages = [
-      "@commitlint/cli",
-      "@commitlint/config-conventional",
-      "@types/fs-extra",
-      "@types/html-webpack-plugin",
-      "@types/jest",
-      "@types/jsdom",
-      "@types/mini-css-extract-plugin",
-      "@types/node",
-      "@types/optimize-css-assets-webpack-plugin",
-      "@types/react",
-      "@types/react-dev-utils",
-      "@types/react-dom",
-      "@types/terser-webpack-plugin",
-      "@types/webpack",
-      "@types/webpack-dev-server",
-      "@types/webpack-manifest-plugin",
-      "@typescript-eslint/eslint-plugin",
-      "@typescript-eslint/eslint-plugin-tslint",
-      "@typescript-eslint/parser",
-      "autoprefixer",
-      "babel-jest",
-      "babel-loader",
-      "babel-plugin-named-asset-import",
-      "babel-preset-react-app",
-      "bfj",
-      "cache-loader",
-      "case-sensitive-paths-webpack-plugin",
-      "codecov",
-      "css-loader",
-      "dependency-cruiser",
-      "eslint",
-      "eslint-config-react-app",
-      "eslint-loader",
-      "eslint-plugin-flowtype",
-      "eslint-plugin-import",
-      "eslint-plugin-jsx-a11y",
-      "eslint-plugin-react",
-      "fibers",
-      "file-loader",
-      "fork-ts-checker-webpack-plugin-alt",
-      "fs-extra",
-      "generate-changelog",
-      "html-loader",
-      "html-webpack-plugin@4.0.0-alpha.2",
-      "husky",
-      "jest",
-      "jest-cli",
-      "jest-pnp-resolver",
-      "jsdom",
-      "lint-staged",
-      "mini-css-extract-plugin",
-      "optimize-css-assets-webpack-plugin",
-      "pnp-webpack-plugin",
-      "postcss-flexbugs-fixes",
-      "postcss-loader",
-      "postcss-preset-env",
-      "postcss-safe-parser",
-      "prettier",
-      "react-dev-utils",
-      "rimraf",
-      "sass",
-      "sass-loader",
-      "serve",
-      "sort-package-json",
-      "style-loader",
-      "terser-webpack-plugin",
-      "ts-jest",
-      "ts-loader",
-      "ts-node",
-      "tslint",
-      "tslint-config-prettier",
-      "tslint-config-standard",
-      "tslint-plugin-prettier",
-      "typescript",
-      "url-loader",
-      "webpack",
-      "webpack-cli",
-      "webpack-dev-server@~3.2.1",
-      "webpack-manifest-plugin",
-      "workbox-webpack-plugin",
+      "@types/clean-webpack-plugin@^0.1.3",
+      "@types/html-webpack-plugin@^3.2.0",
+      "@types/webpack@^4.4.34",
+      "@types/webpack-dev-server@^3.1.6",
+      "@types/webpack-manifest-plugin@^2.0.0",
+      "@typescript-eslint/eslint-plugin@^1.11.0",
+      "@typescript-eslint/parser@^1.11.0",
+      "clean-webpack-plugin@^3.0.0",
+      "cross-env@^5.2.0",
+      "eslint@^6.0.1",
+      "eslint-config-prettier@^6.0.0",
+      "eslint-plugin-prettier@^3.1.0",
+      "html-webpack-plugin@^3.2.0",
+      "prettier@^1.18.2",
+      "serve@^11.0.2",
+      "ts-loader@^6.0.4",
+      "ts-node@^8.3.0",
+      "typescript@^3.5.2",
+      "webpack@^4.35.0",
+      "webpack-cli@^3.3.5",
+      "webpack-dev-server@^3.7.2",
+      "webpack-manifest-plugin@^2.0.4"
     ];
     this.yarnInstall(dependencyPackages, { dev: false })
     this.yarnInstall(devDependencyPackages, { dev: true })
