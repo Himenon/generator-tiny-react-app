@@ -19,5 +19,5 @@ yarn build
 yarn global add
 
 # another directory
-yo @himenon/node-lib
+yo @himenon/tiny-react-app
 ```
