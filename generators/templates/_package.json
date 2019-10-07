@@ -1,13 +1,28 @@
 {
   "name": "<%= projectName %>",
   "version": "1.0.0",
-  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:<%= authorName %>/<%= projectName %>.git"
+  },
+  "homepage": "https://<%= authorName %>.github.io/<%= projectName %>/",
   "license": "MIT",
   "scripts": {
-    "start": "cross-env NODE_ENV=development ts-node develop.ts",
-    "build": "cross-env NODE_ENV=production ts-node build.ts",
+    "build": "cross-env NODE_ENV=production ts-node -P ./scripts/tsconfig.cli.json ./scripts/build.ts",
+    "format": "yarn run prettier && yarn run lint:fix",
+    "lint": "eslint -c .eslintrc.js '**/*.{ts,tsx}'",
+    "lint:fix": "eslint --fix -c .eslintrc.js '**/*.{ts,tsx}'",
+    "prettier": "prettier --config .prettierrc --write src/**/*",
     "serve": "serve dist",
-    "format": "eslint --fix -c .eslintrc.json '**/*.{ts,tsx}'"
+    "start": "cross-env NODE_ENV=development ts-node -P ./scripts/tsconfig.cli.json ./scripts/develop.ts",
+    "deploy": "yarn run build && yarn run publish:site",
+    "publish:site": "ts-node -P ./scripts/tsconfig.cli.json ./scripts/publish.ts"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "dependencies": {},
   "devDependencies": {}
 }

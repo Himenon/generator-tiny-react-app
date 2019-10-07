@@ -1,15 +1,15 @@
 import * as webpack from "webpack";
 import { generateConfig } from "./webpack.config";
-import * as webpackDevServer from "webpack-dev-server";
 
 const main = async () => {
-  const config = generateConfig(false);
+  const isProduction = process.env.NODE_ENV === "production";
+  const config = generateConfig(isProduction);
   const compiler = webpack(config);
-  const server = new webpackDevServer(compiler, {
-    hot: true,
-    open: true
+  compiler.run(err => {
+    if (err) {
+      console.error(err);
+    }
   });
-  await server.listen(8081);
 };
 
 main().catch(e => {

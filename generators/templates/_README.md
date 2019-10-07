@@ -4,13 +4,19 @@
 
 ```bash
 yarn
-yarn start
+yarn start # start debug server
 ```
 
 ## Build
 
 ```bash
 yarn run build
+```
+
+### Release
+
+```bash
+yarn run deploy # default release: github pages
 ```
 
 ### Run server

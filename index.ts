@@ -22,7 +22,7 @@ export = class extends Generator {
 
   public async _prompting(): Promise<PromptResult> {
     const readResult = ReadPkgUp.sync({ normalize: false });
-    const pkg = readResult ? readResult.package : {};
+    const pkg = readResult ? readResult.packageJson : {};
     const author = pkg.author;
     const inputAuthor = typeof author === "string" ? {
       name: author,
@@ -85,7 +85,7 @@ export = class extends Generator {
       templateOptions
     )
     const dotFiles = [
-      "eslintrc.json",
+      "eslintrc.js",
       "gitignore",
       "huskyrc",
       "lintstagedrc",
@@ -101,32 +101,63 @@ export = class extends Generator {
   }
 
   public install() {
-    const dependencyPackages: string[] = [];
-    const devDependencyPackages: string[] = [
-      "@types/clean-webpack-plugin@^0.1.3",
-      "@types/html-webpack-plugin@^3.2.0",
-      "@types/webpack@^4.4.34",
-      "@types/webpack-dev-server@^3.1.6",
-      "@typescript-eslint/eslint-plugin@^1.12.0",
-      "@typescript-eslint/eslint-plugin-tslint@^1.12.0",
-      "@typescript-eslint/parser@^1.12.0",
-      "@typescript-eslint/typescript-estree@^1.12.0",
-      "clean-webpack-plugin@^3.0.0",
-      "cross-env@^5.2.0",
-      "eslint@^6.0.1",
-      "eslint-config-prettier@^6.0.0",
-      "eslint-plugin-prettier@^3.1.0",
-      "html-webpack-plugin@^3.2.0",
-      "prettier@^1.18.2",
-      "serve@^11.0.2",
-      "ts-loader@^6.0.4",
-      "ts-node@^8.3.0",
-      "typescript@^3.5.2",
-      "webpack@^4.35.0",
-      "webpack-cli@^3.3.5",
-      "webpack-dev-server@^3.7.2",
-      "webpack-manifest-plugin@^2.0.4"
-    ];
+    const dependencyPackages: string[] = Object.entries({
+      "react": "^16.10.2",
+      "react-dom": "^16.10.2"
+    }).map(entry => `${entry[0]}@${entry[1]}`);;
+    const devDependencyPackages: string[] = Object.entries({
+      "@babel/core": "^7.6.2",
+      "@babel/preset-env": "^7.6.2",
+      "@types/clean-webpack-plugin": "^0.1.3",
+      "@types/gh-pages": "^2.0.1",
+      "@types/html-webpack-plugin": "^3.2.0",
+      "@types/mini-css-extract-plugin": "^0.8.0",
+      "@types/react": "^16.9.5",
+      "@types/react-dom": "^16.9.1",
+      "@types/webpack": "^4.4.34",
+      "@types/webpack-dev-server": "^3.1.6",
+      "@typescript-eslint/eslint-plugin": "^1.12.0",
+      "@typescript-eslint/eslint-plugin-tslint": "^1.12.0",
+      "@typescript-eslint/parser": "^1.12.0",
+      "@typescript-eslint/typescript-estree": "^1.12.0",
+      "autoprefixer": "^9.6.4",
+      "babel-loader": "^8.0.6",
+      "clean-webpack-plugin": "^3.0.0",
+      "cross-env": "^5.2.0",
+      "css-loader": "^3.2.0",
+      "eslint": "^6.5.1",
+      "eslint-config-prettier": "^6.4.0",
+      "eslint-plugin-prettier": "^3.1.1",
+      "eslint-plugin-react": "^7.16.0",
+      "eslint-plugin-react-hooks": "^2.1.2",
+      "fibers": "^4.0.1",
+      "fork-ts-checker-notifier-webpack-plugin": "^1.0.2",
+      "fork-ts-checker-webpack-plugin": "^1.5.0",
+      "friendly-errors-webpack-plugin": "^1.7.0",
+      "gh-pages": "^2.1.1",
+      "html-webpack-plugin": "^3.2.0",
+      "husky": "^3.0.8",
+      "lint-staged": "^9.4.1",
+      "mini-css-extract-plugin": "^0.8.0",
+      "optimize-css-assets-webpack-plugin": "^5.0.3",
+      "postcss-loader": "^3.0.0",
+      "prettier": "^1.18.2",
+      "progress-bar-webpack-plugin": "^1.12.1",
+      "sass": "^1.23.0",
+      "sass-loader": "^8.0.0",
+      "serve": "^11.0.2",
+      "sort-package-json": "^1.22.1",
+      "style-loader": "^1.0.0",
+      "terser-webpack-plugin": "^2.1.2",
+      "ts-loader": "^6.0.4",
+      "ts-node": "^8.3.0",
+      "typescript": "^3.6.3",
+      "webpack": "4.39.3",
+      "webpack-cli": "^3.3.8",
+      "webpack-dev-server": "^3.8.2",
+      "webpack-manifest-plugin": "^2.2.0",
+      "webpack-notifier": "^1.8.0"
+    }).map(entry => `${entry[0]}@${entry[1]}`);;
     this.yarnInstall(dependencyPackages, { dev: false })
     this.yarnInstall(devDependencyPackages, { dev: true })
   }

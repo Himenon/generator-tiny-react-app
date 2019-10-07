@@ -1,5 +1,7 @@
 {
-  "app.js": "app.bundle.js",
-  "print.js": "print.bundle.js",
+  "application.css": "application.9156b894.css",
+  "application.js": "application.bundle.js",
+  "application.js.map": "application.bundle.js.map",
+  "application.bundle.js.LICENSE": "application.bundle.js.LICENSE",
   "index.html": "index.html"
 }
