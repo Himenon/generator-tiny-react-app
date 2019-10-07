@@ -1,22 +1,25 @@
 {
   "name": "<%= projectName %>",
   "version": "1.0.0",
+  "homepage": "https://<%= authorName %>.github.io/<%= projectName %>/",
   "repository": {
     "type": "git",
-    "url": "git@github.com:<%= authorName %>/<%= projectName %>.git"
+    "url": "git@github.com:/tiny.git"
   },
-  "homepage": "https://<%= authorName %>.github.io/<%= projectName %>/",
   "license": "MIT",
   "scripts": {
     "build": "cross-env NODE_ENV=production ts-node -P ./scripts/tsconfig.cli.json ./scripts/build.ts",
+    "deploy": "yarn run build && yarn run publish:site",
     "format": "yarn run prettier && yarn run lint:fix",
     "lint": "eslint -c .eslintrc.js '**/*.{ts,tsx}'",
     "lint:fix": "eslint --fix -c .eslintrc.js '**/*.{ts,tsx}'",
     "prettier": "prettier --config .prettierrc --write src/**/*",
+    "publish:site": "ts-node -P ./scripts/tsconfig.cli.json ./scripts/publish.ts",
     "serve": "serve dist",
     "start": "cross-env NODE_ENV=development ts-node -P ./scripts/tsconfig.cli.json ./scripts/develop.ts",
-    "deploy": "yarn run build && yarn run publish:site",
-    "publish:site": "ts-node -P ./scripts/tsconfig.cli.json ./scripts/publish.ts"
+    "test": "yarn run test:jest",
+    "test:jest": "jest -c ./jest.config.json",
+    "test:jest:watch": "yarn run test:jest --watch",
   },
   "husky": {
     "hooks": {

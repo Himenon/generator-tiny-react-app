@@ -2,11 +2,14 @@ import * as Domain from "@app/domain";
 import * as React from "react";
 import * as Counter from "../Counter";
 import { generateStore, Store } from "./Store";
-import * as Template from "./Template";
+import { CounterPage } from "@app/view-component";
 
-const generateProps = (stores: Domain.Stores, store: Store): Template.Props => {
+const generateProps = (stores: Domain.Stores, store: Store): CounterPage.Props => {
   return {
-    Counter: <Counter.Container store={store.counter} />,
+    heading: {
+      children: "Counter",
+    },
+    counter: Counter.generateProps(store.counter),
   };
 };
 
@@ -16,5 +19,5 @@ export const Container = ({ reducers }: { reducers: Domain.Reducers }) => {
     app: createReducer(React.useReducer(...reducers.app)),
   };
   const viewStore = generateStore(domainStores);
-  return <Template.Component {...generateProps(domainStores, viewStore)} />;
+  return <CounterPage.Component {...generateProps(domainStores, viewStore)} />;
 };

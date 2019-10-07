@@ -106,9 +106,10 @@ export const generateConfig = (isProduction: boolean): webpack.Configuration => 
     resolve: {
       extensions: [".js", ".ts", ".tsx", ".scss", ".json"],
       alias: {
-        "@app/vc": appPath("./src/vc/index.ts"),
-        "@app/cc": appPath("./src/domain/index.ts"),
+        "@app/view-component": appPath("./src/view-component/index.ts"),
+        "@app/container-component": appPath("./src/container-component/index.ts"),
         "@app/domain": appPath("./src/domain/index.ts"),
+        "@app/infra": appPath("./src/infra/index.ts"),
       },
     },
     module: {
