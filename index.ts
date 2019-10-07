@@ -91,6 +91,7 @@ export = class extends Generator {
       "lintstagedrc",
       "npmrc",
       "npmrc.template",
+      "_prettierrc",
       "travis.yml",
       "yarnrc",
     ]
