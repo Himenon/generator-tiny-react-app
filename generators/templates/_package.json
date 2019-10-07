@@ -19,7 +19,7 @@
     "start": "cross-env NODE_ENV=development ts-node -P ./scripts/tsconfig.cli.json ./scripts/develop.ts",
     "test": "yarn run test:jest",
     "test:jest": "jest -c ./jest.config.json",
-    "test:jest:watch": "yarn run test:jest --watch",
+    "test:jest:watch": "yarn run test:jest --watch"
   },
   "husky": {
     "hooks": {
